@@ -1,21 +1,41 @@
+import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 import LogoSrc from "../../assets/images/logo.png";
 
 export default function TodoList() {
-  const [todos, setTodos] = useState("");
+  const [todos, setTodos] = useState({
+    title: "",
+    content: "",
+  });
 
   const onChange = (e) => {
     const {
       target: { name, value },
     } = e;
-    if (name === "todo") {
-      setTodos(value);
-    }
+    setTodos({
+      ...todos,
+      [name]: value,
+    });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
+    const { title, content } = todos;
     e.preventDefault();
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/todos",
+        {
+          title,
+          content,
+        },
+        { headers: { Authorization: localStorage.getItem("token") } }
+      );
+      console.log(res);
+      alert("업로드");
+    } catch (err) {
+      alert(err);
+    }
   };
 
   return (
@@ -23,11 +43,19 @@ export default function TodoList() {
       <Form>
         <Logo src={LogoSrc} />
         <Title>Todo List</Title>
-        <InputTodo
+        <InputTitle
           type="text"
-          name="todo"
-          placeholder="todo"
-          value={todos}
+          name="title"
+          placeholder="제목"
+          value={todos.title}
+          required
+          onChange={onChange}
+        />
+        <InputContent
+          type="text"
+          name="content"
+          placeholder="내용"
+          value={todos.content}
           required
           onChange={onChange}
         />
@@ -70,7 +98,7 @@ const Title = styled.h1`
   line-height: 36px;
   color: #191919;
 `;
-const InputTodo = styled.input`
+const InputTitle = styled.input`
   position: absolute;
   padding: 24px;
   width: 329px;
@@ -80,6 +108,18 @@ const InputTodo = styled.input`
   border: 1px solid #c4c4c4;
   border-radius: 6px;
 `;
+
+const InputContent = styled.input`
+  position: absolute;
+  padding: 24px;
+  width: 329px;
+  height: 68px;
+  left: 23px;
+  top: 431px;
+  border: 1px solid #c4c4c4;
+  border-radius: 6px;
+`;
+
 const SubmitBtn = styled.button`
   position: absolute;
   width: 343px;

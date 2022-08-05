@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
@@ -10,10 +10,16 @@ export default function Login() {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/todo/todolist");
+    }
+  });
+
   const emailValidation = email.includes("@") && email.includes(".");
-  // /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/
+
   const passwordValidation = password.length >= 8;
-  // /[\.@]/
 
   const onChange = (e) => {
     const {
@@ -29,15 +35,15 @@ export default function Login() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/users/login", {
+      const res = await axios.post("http://localhost:8080/users/login", {
         email,
         password,
       });
       alert(res.data.message);
       localStorage.setItem("token", res.data.token);
       navigate("/todo/todolist");
-    } catch (err) {
-      alert(err);
+    } catch (error) {
+      alert("회원가입을 먼저 해주세요.");
     }
   };
 
@@ -66,13 +72,13 @@ export default function Login() {
           required
           onChange={onChange}
         />
-        <LoginBtn
+        <LoginButton
           type="submit"
           onClick={onSubmit}
           disabled={!emailValidation || !passwordValidation}
         >
           로그인
-        </LoginBtn>
+        </LoginButton>
         <SignUpBtn onClick={handleSignup}>회원가입</SignUpBtn>
       </Form>
     </Container>
@@ -136,7 +142,7 @@ const InputPassword = styled.input`
   border-radius: 6px;
 `;
 
-const LoginBtn = styled.button`
+const LoginButton = styled.button`
   position: absolute;
   width: 343px;
   height: 54px;

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import LogoSrc from "../../assets/images/logo.png";
+import emailPattern from "../../utils/Pattern";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -29,7 +30,7 @@ export default function SignUp() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/users/create", {
+      const res = await axios.post("http://localhost:8080/users/create", {
         email,
         password,
       });
@@ -55,6 +56,7 @@ export default function SignUp() {
           name="email"
           placeholder="이메일"
           value={email}
+          pattern={emailPattern}
           required
           onChange={onChange}
         />
@@ -66,13 +68,13 @@ export default function SignUp() {
           required
           onChange={onChange}
         />
-        <SignUpBtn
+        <SignUpButton
           type="submit"
           onClick={onSubmit}
           disabled={!emailValidation || !passwordValidation}
         >
           회원 가입하기
-        </SignUpBtn>
+        </SignUpButton>
         <LoginBtn onClick={handleSignup}>로그인</LoginBtn>
       </Form>
     </Container>
@@ -153,7 +155,7 @@ const InputPassword = styled.input`
   border-radius: 6px;
 `;
 
-const SignUpBtn = styled.button`
+const SignUpButton = styled.button`
   position: absolute;
   width: 343px;
   height: 54px;
