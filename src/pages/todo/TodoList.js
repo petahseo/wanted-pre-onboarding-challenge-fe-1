@@ -31,7 +31,9 @@ export default function TodoList() {
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       );
-      console.log(res);
+      const todoTitle = res.data.data.title;
+      const todoContent = res.data.data.content;
+      console.log(todoTitle, todoContent);
       alert("업로드");
     } catch (err) {
       alert(err);
@@ -59,9 +61,9 @@ export default function TodoList() {
           required
           onChange={onChange}
         />
-        <SubmitBtn type="submit" onClick={onSubmit}>
+        <SubmitButton type="submit" onClick={onSubmit}>
           Submit
-        </SubmitBtn>
+        </SubmitButton>
       </Form>
     </Container>
   );
@@ -120,7 +122,7 @@ const InputContent = styled.input`
   border-radius: 6px;
 `;
 
-const SubmitBtn = styled.button`
+const SubmitButton = styled.button`
   position: absolute;
   width: 343px;
   height: 54px;
