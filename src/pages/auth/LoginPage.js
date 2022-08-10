@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import LogoSrc from "../../assets/images/logo.png";
+import API from "../../utils/Api";
+// import Pattern from "../../utils/Pattern";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -18,7 +20,6 @@ export default function Login() {
   });
 
   const emailValidation = email.includes("@") && email.includes(".");
-
   const passwordValidation = password.length >= 8;
 
   const onChange = (e) => {
@@ -35,7 +36,7 @@ export default function Login() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8080/users/login", {
+      const res = await axios.post(`${API.login}`, {
         email,
         password,
       });
@@ -61,6 +62,7 @@ export default function Login() {
           name="email"
           placeholder="이메일"
           value={email}
+          //pattern={Pattern.emailPattern}
           required
           onChange={onChange}
         />
@@ -69,6 +71,7 @@ export default function Login() {
           name="password"
           placeholder="비밀번호"
           value={password}
+          //pattern={Pattern.passwordPattern}
           required
           onChange={onChange}
         />
@@ -79,7 +82,7 @@ export default function Login() {
         >
           로그인
         </LoginButton>
-        <SignUpBtn onClick={handleSignup}>회원가입</SignUpBtn>
+        <SignUpButton onClick={handleSignup}>회원가입</SignUpButton>
       </Form>
     </Container>
   );
@@ -167,7 +170,7 @@ const LoginButton = styled.button`
   }
 `;
 
-const SignUpBtn = styled.a`
+const SignUpButton = styled.a`
   position: absolute;
   left: 165px;
   top: 599px;

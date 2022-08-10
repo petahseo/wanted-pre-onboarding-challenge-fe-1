@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import LogoSrc from "../../assets/images/logo.png";
-import emailPattern from "../../utils/Pattern";
+import API from "../../utils/Api";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -12,9 +12,7 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   const emailValidation = email.includes("@") && email.includes(".");
-  // /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/
   const passwordValidation = password.length >= 8;
-  // /[\.@]/
 
   const onChange = (e) => {
     const {
@@ -30,7 +28,7 @@ export default function SignUp() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8080/users/create", {
+      const res = await axios.post(`${API.signup}`, {
         email,
         password,
       });
@@ -56,7 +54,6 @@ export default function SignUp() {
           name="email"
           placeholder="이메일"
           value={email}
-          pattern={emailPattern}
           required
           onChange={onChange}
         />
@@ -75,7 +72,7 @@ export default function SignUp() {
         >
           회원 가입하기
         </SignUpButton>
-        <LoginBtn onClick={handleSignup}>로그인</LoginBtn>
+        <LoginButton onClick={handleSignup}>로그인</LoginButton>
       </Form>
     </Container>
   );
@@ -179,7 +176,7 @@ const SignUpButton = styled.button`
     cursor: default;
   }
 `;
-const LoginBtn = styled.a`
+const LoginButton = styled.a`
   position: absolute;
   left: 165px;
   top: 599px;
