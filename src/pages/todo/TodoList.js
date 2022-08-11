@@ -1,12 +1,27 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import API from "../../utils/Api";
 
 export default function TodoList() {
-  return (
-    <TodoForm>
-      <Todos>제목</Todos>
-      <Todos>내용</Todos>
-    </TodoForm>
-  );
+  const [todos, setTodos] = useState([]);
+
+  const getTodos = async () => {
+    try {
+      const res = await axios.get(`${API.todos}`, {
+        headers: { Authorization: localStorage.getItem("token") },
+      });
+      setTodos(res.data.data);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  useEffect(() => {
+    getTodos();
+  });
+
+  return <TodoForm></TodoForm>;
 }
 
 const TodoForm = styled.ul`
@@ -17,5 +32,3 @@ const TodoForm = styled.ul`
   left: 20px;
   top: 450px;
 `;
-
-const Todos = styled.li``;
