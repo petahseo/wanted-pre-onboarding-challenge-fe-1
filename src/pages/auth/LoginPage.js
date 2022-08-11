@@ -15,7 +15,7 @@ export default function Login() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      navigate("/todo/todolist");
+      navigate("/todo/todoForm");
     }
   });
 
@@ -42,7 +42,7 @@ export default function Login() {
       });
       alert(res.data.message);
       localStorage.setItem("token", res.data.token);
-      navigate("/todo/todolist");
+      navigate("/todo/todoForm");
     } catch (error) {
       alert("회원가입을 먼저 해주세요.");
     }
@@ -93,7 +93,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: #c7c7c7;
 `;
 
