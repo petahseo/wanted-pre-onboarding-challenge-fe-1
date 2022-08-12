@@ -30,7 +30,6 @@ export default function TodoList() {
             id={todo.id}
             title={todo.title}
             content={todo.content}
-            text={JSON.stringify(todo.content).replace(/"/g, "")}
           />
         ))}
       </TodoForm>
