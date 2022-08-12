@@ -31,7 +31,7 @@ export default function TodoCreate() {
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       );
-      console.log(res);
+      console.log(res.data.data);
       alert("업로드");
     } catch (err) {
       alert(err);

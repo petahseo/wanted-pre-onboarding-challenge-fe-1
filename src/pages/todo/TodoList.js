@@ -19,16 +19,38 @@ export default function TodoList() {
 
   useEffect(() => {
     getTodos();
-  });
+  }, []);
 
-  return <TodoForm></TodoForm>;
+  return (
+    <Container>
+      <TodoForm>
+        {todos.map((todo) => (
+          <List
+            key={todo.id}
+            id={todo.id}
+            title={todo.title}
+            content={todo.content}
+            text={JSON.stringify(todo.content).replace(/"/g, "")}
+          />
+        ))}
+      </TodoForm>
+    </Container>
+  );
 }
 
+const Container = styled.div``;
 const TodoForm = styled.ul`
   position: absolute;
   padding: 20px;
   width: 329px;
-  height: 68px;
-  left: 20px;
-  top: 450px;
+  height: 320px;
+  left: 23px;
+  top: 480px;
+  color: black;
+  border: 1px solid #c4c4c4;
+  border-radius: 6px;
+`;
+
+const List = styled.li`
+  position: absolute;
 `;
