@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
@@ -11,13 +11,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/todo/todoForm");
-    }
-  });
 
   const emailValidation = email.includes("@") && email.includes(".");
   const passwordValidation = password.length >= 8;
