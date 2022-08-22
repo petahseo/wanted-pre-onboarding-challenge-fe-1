@@ -71,8 +71,8 @@ const Form = styled.div``;
 const InputTitle = styled.input`
   position: absolute;
   padding: 24px;
-  width: 329px;
-  height: 68px;
+  width: 280px;
+  height: 26px;
   left: 23px;
   top: 240px;
   border: 1px solid #c4c4c4;
@@ -82,8 +82,8 @@ const InputTitle = styled.input`
 const InputContent = styled.input`
   position: absolute;
   padding: 24px;
-  width: 329px;
-  height: 68px;
+  width: 280px;
+  height: 26px;
   left: 23px;
   top: 317px;
   border: 1px solid #c4c4c4;

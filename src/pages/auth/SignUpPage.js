@@ -126,8 +126,8 @@ const InputEmail = styled.input`
   gap: 10px;
 
   position: absolute;
-  width: 329px;
-  height: 68px;
+  width: 280px;
+  height: 26px;
   left: 23px;
   top: 354px;
 
@@ -143,8 +143,8 @@ const InputPassword = styled.input`
   gap: 10px;
 
   position: absolute;
-  width: 329px;
-  height: 68px;
+  width: 280px;
+  height: 26px;
   left: 23px;
   top: 431px;
 

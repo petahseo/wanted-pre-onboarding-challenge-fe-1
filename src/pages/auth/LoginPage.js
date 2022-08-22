@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
+
 import LogoSrc from "../../assets/images/logo.png";
 import API from "../../utils/Api";
-// import Pattern from "../../utils/Pattern";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -119,8 +119,8 @@ const Title = styled.h1`
 const InputEmail = styled.input`
   position: absolute;
   padding: 24px;
-  width: 329px;
-  height: 68px;
+  width: 280px;
+  height: 26px;
   left: 23px;
   top: 354px;
   border: 1px solid #c4c4c4;
@@ -130,8 +130,8 @@ const InputEmail = styled.input`
 const InputPassword = styled.input`
   position: absolute;
   padding: 24px;
-  width: 329px;
-  height: 68px;
+  width: 280px;
+  height: 26px;
   left: 23px;
   top: 431px;
   border: 1px solid #c4c4c4;

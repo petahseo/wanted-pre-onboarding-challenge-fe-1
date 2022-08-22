@@ -41,10 +41,10 @@ const Container = styled.div``;
 const TodoForm = styled.ul`
   position: absolute;
   padding: 20px;
-  width: 329px;
-  height: 320px;
+  width: 290px;
+  height: 280px;
   left: 23px;
-  top: 480px;
+  top: 460px;
   color: black;
   border: 1px solid #c4c4c4;
   border-radius: 6px;

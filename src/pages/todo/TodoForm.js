@@ -1,7 +1,8 @@
 import TodoCreate from "./TodoCreate";
 import TodoList from "./TodoList";
-import styled from "styled-components";
 import LogoSrc from "../../assets/images/logo.png";
+
+import styled from "styled-components";
 
 export default function TodoForm() {
   return (
